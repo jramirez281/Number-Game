@@ -29,34 +29,25 @@ void play_game(int save_data) {
 	int score = 0;
 	int prev_choice[2] = {-1,-1};
 
-	//file pointer for reading from save file
-	FILE *fptr = fopen("save_file.txt", "r");
 
 	//if we are loading from save data and 
 	//save file exists then populate state variables
 	//with data from file
-	if (save_data == 1 && fptr != NULL) {
-		for (int j = 0; j < grid_rows; j++) {
-			for (int k = 0; k < grid_cols; k++) {
-				fscanf(fptr, "%d,", &choices[j][k]);
-			}
-		}			
-		fscanf(fptr, "%d", &score);
-		fscanf(fptr, "%d", &i);
-		fscanf(fptr, "%d,%d", &prev_choice[0], &prev_choice[1]);
+	if (save_data == 1) {
+		//file pointer for reading from save file
+		FILE *fptr = fopen("save_file.txt", "r");
+		if (fptr != NULL) {
+			for (int j = 0; j < grid_rows; j++) {
+				for (int k = 0; k < grid_cols; k++) {
+					fscanf(fptr, "%d,", &choices[j][k]);
+				}
+			}			
+			fscanf(fptr, "%d", &score);
+			fscanf(fptr, "%d", &i);
+			fscanf(fptr, "%d,%d", &prev_choice[0], &prev_choice[1]);
+			fclose(fptr);
+		}
 	}
-	else if (save_data == 0) {
-		fptr = fopen("save_file.txt", "w");
-		for (int j = 0; j < grid_rows; j++) {
-			for (int k = 0; k < grid_cols; k++) {
-				fscanf(fptr, "%d,", &choices[j][k]);
-			}
-		}			
-		fscanf(fptr, "%d", &score);
-		fscanf(fptr, "%d", &i);
-		fscanf(fptr, "%d,%d", &prev_choice[0], &prev_choice[1]);
-	}
-	fclose(fptr);
 
 	//declaring new window for containing grid
 	WINDOW *grid_win;
@@ -67,8 +58,8 @@ void play_game(int save_data) {
 	int highlighty = 0;
 	int highlightx = 0;
 	if (save_data == 1) {
-		highlightx = prev_choice[0];
-		highlighty = prev_choice[1];
+		highlighty = prev_choice[0];
+		highlightx = prev_choice[1];
 	}
 	bool enter_pressed = false;
 	bool q_pressed = false;
