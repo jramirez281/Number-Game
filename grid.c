@@ -66,6 +66,10 @@ void play_game(int save_data) {
 	char fin_score_str[] = "Final Score: ";
 	int highlighty = 0;
 	int highlightx = 0;
+	if (save_data == 1) {
+		highlightx = prev_choice[0];
+		highlighty = prev_choice[1];
+	}
 	bool enter_pressed = false;
 	bool q_pressed = false;
 	int c;
