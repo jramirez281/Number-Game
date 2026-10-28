@@ -45,6 +45,17 @@ void play_game(int save_data) {
 		fscanf(fptr, "%d", &i);
 		fscanf(fptr, "%d,%d", &prev_choice[0], &prev_choice[1]);
 	}
+	else if (save_data == 0) {
+		fptr = fopen("save_file.txt", "w");
+		for (int j = 0; j < grid_rows; j++) {
+			for (int k = 0; k < grid_cols; k++) {
+				fscanf(fptr, "%d,", &choices[j][k]);
+			}
+		}			
+		fscanf(fptr, "%d", &score);
+		fscanf(fptr, "%d", &i);
+		fscanf(fptr, "%d,%d", &prev_choice[0], &prev_choice[1]);
+	}
 	fclose(fptr);
 
 	//declaring new window for containing grid
