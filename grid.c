@@ -79,8 +79,8 @@ void play_game(int save_data) {
 	keypad(grid_win, TRUE);
 
 	//printing information for player
-	mvprintw(3, (COLS-strlen(instr1))/2, instr1);
-	mvprintw(4, (COLS-strlen(instr2))/2, instr2);
+	mvprintw(0, (COLS-strlen(instr1))/2, instr1);
+	mvprintw(1, (COLS-strlen(instr2))/2, instr2);
 	mvprintw(LINES - 5, (COLS-strlen(score_str))/2, score_str);
 	printw("%d", score);
 	mvprintw(LINES - 2, 0, "Press q to exit");
@@ -105,6 +105,9 @@ void play_game(int save_data) {
 		else {
 			//highlight cell where cursor is currently
 			print_grid(grid_win, highlighty, highlightx, grid_rows, grid_cols, choices);
+			mvprintw(LINES - 5, (COLS-strlen(score_str))/2, score_str);
+			printw("%d", score);
+			refresh();
 		}
 
 		if (i == 25) {
